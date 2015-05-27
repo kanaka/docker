@@ -8,7 +8,7 @@
 #   sudo docker run fentas/slimerjs /usr/bin/casperjs | head -n 1
 #   sudo docker run -v `pwd`:/mnt/test fentas/slimerjs /usr/bin/slimerjs /mnt/test/test.js
 
-# VERSION 1.0.0
+# VERSION 1.0.1
 
 FROM ubuntu:12.04
 
@@ -16,7 +16,7 @@ MAINTAINER fentas <jan.guth.so>
 
 # Env
 ENV SLIMERJS_VERSION_F 0.9.5
-ENV CASPERJS_VERSION_T 1.1-beta3
+ENV CASPERJS_VERSION_T master
 
 # Commands
 RUN \
