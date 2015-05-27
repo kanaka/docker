@@ -1,7 +1,7 @@
 # SlimerJS - CasperJs
 
 - [slimerjs](https://slimerjs.org/) ```0.9.5```
-- [casperjs](http://casperjs.org/) ```master```
+- [casperjs](http://casperjs.org/) ```master (latest)```
 
 ## Usage
 
