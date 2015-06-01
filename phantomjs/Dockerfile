@@ -22,17 +22,16 @@ ENV CASPERJS_VERSION master
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 unzip \
+  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 \
   build-essential g++ flex bison gperf ruby perl \
   libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
   libpng-dev libjpeg-dev python && \
   mkdir -p /srv/var && \
-  wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-source.zip && \
-  unzip /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip -d /tmp && \
-  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip  && \
-  /tmp/phantomjs-$PHANTOMJS_VERSION/build.sh --silent --confirm && \
-  mv /tmp/phantomjs-$PHANTOMJS_VERSION/bin/phantomjs /usr/bin && \
-  rm -R /tmp/phantomjs-$PHANTOMJS_VERSION/ && \
+  git clone https://github.com/ariya/phantomjs.git /tmp/phantomjs && \
+  cd /tmp/phantomjs && git checkout $PHANTOMJS_VERSION && \
+  ./build.sh --silent --confirm && \
+  mv ./bin/phantomjs /usr/bin && \
+  cd /tmp && rm -R ./phantomjs && \
   git clone https://github.com/n1k0/casperjs.git /srv/var/casperjs && \
   cd /srv/var/casperjs && \
   git checkout $CASPERJS_VERSION && \
