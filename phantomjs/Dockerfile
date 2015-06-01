@@ -22,13 +22,14 @@ ENV CASPERJS_VERSION_T master
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 && \
+  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 unzip && \
   mkdir -p /srv/var && \
-  wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
-  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /srv/var/phantomjs && \
-  ln -s /srv/var/phantomjs/bin/phantomjs /usr/bin/phantomjs && \
+  wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-source.zip && \
+  unzip /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip -d /tmp && \
+  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip  && \
+  cd /tmp/phantomjs-$PHANTOMJS_VERSION-source/ && \
+  ./configure && make && sudo make install && \
+  cd / && rm -R /tmp/phantomjs-$PHANTOMJS_VERSION-source/ && \
   git clone https://github.com/n1k0/casperjs.git /srv/var/casperjs && \
   cd /srv/var/casperjs && \
   git checkout $CASPERJS_VERSION_T && \
