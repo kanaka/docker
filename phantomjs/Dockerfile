@@ -28,7 +28,7 @@ RUN \
   libpng-dev libjpeg-dev python && \
   mkdir -p /srv/var && \
   git clone git://github.com/ariya/phantomjs.git /tmp/phantomjs && \
-  git checkout $PHANTOMJS_VERSION && \
+  cd /tmp/phantomjs && git checkout $PHANTOMJS_VERSION && cd - && \
   /tmp/phantomjs/build.sh --silent --confirm && \
   mv /tmp/phantomjs/bin/phantomjs /usr/bin && \
   rm -R /tmp/phantomjs/ && \
