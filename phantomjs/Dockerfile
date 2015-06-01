@@ -16,23 +16,25 @@ MAINTAINER fentas <jan.guth.so>
 
 # Env
 ENV PHANTOMJS_VERSION 2.0.0
-ENV CASPERJS_VERSION_T master
+ENV CASPERJS_VERSION master
 
 # Commands
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 unzip && \
+  apt-get install -y vim git wget libfreetype6 libfontconfig bzip2 \
+  build-essential g++ flex bison gperf ruby perl \
+  libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev \
+  libpng-dev libjpeg-dev python && \
   mkdir -p /srv/var && \
-  wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-source.zip && \
-  unzip /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip -d /tmp && \
-  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip  && \
-  cd /tmp/phantomjs-$PHANTOMJS_VERSION/ && \
-  ./configure && make && sudo make install && \
-  cd / && rm -R /tmp/phantomjs-$PHANTOMJS_VERSION/ && \
+  git clone git://github.com/ariya/phantomjs.git /tmp/phantomjs && \
+  git checkout $PHANTOMJS_VERSION && \
+  /tmp/phantomjs/build.sh --silent --confirm && \
+  mv /tmp/phantomjs/bin/phantomjs /usr/bin && \
+  rm -R /tmp/phantomjs/ && \
   git clone https://github.com/n1k0/casperjs.git /srv/var/casperjs && \
   cd /srv/var/casperjs && \
-  git checkout $CASPERJS_VERSION_T && \
+  git checkout $CASPERJS_VERSION && \
   ln -s /srv/var/casperjs/bin/casperjs /usr/bin/casperjs && \
   apt-get autoremove -y && \
   apt-get clean all
