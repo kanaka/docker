@@ -27,9 +27,9 @@ RUN \
   wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-source.zip && \
   unzip /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip -d /tmp && \
   rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-source.zip  && \
-  cd /tmp/phantomjs-$PHANTOMJS_VERSION-source/ && \
+  cd /tmp/phantomjs-$PHANTOMJS_VERSION/ && \
   ./configure && make && sudo make install && \
-  cd / && rm -R /tmp/phantomjs-$PHANTOMJS_VERSION-source/ && \
+  cd / && rm -R /tmp/phantomjs-$PHANTOMJS_VERSION/ && \
   git clone https://github.com/n1k0/casperjs.git /srv/var/casperjs && \
   cd /srv/var/casperjs && \
   git checkout $CASPERJS_VERSION_T && \
