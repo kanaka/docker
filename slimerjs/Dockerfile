@@ -15,7 +15,7 @@ FROM ubuntu:12.04
 MAINTAINER fentas <jan.guth.so>
 
 # Env
-ENV SLIMERJS_VERSION_F 0.9.5
+ENV SLIMERJS_VERSION_F 0.9.6
 ENV CASPERJS_VERSION_T master
 
 # Commands
